@@ -41,10 +41,6 @@ body {
 
 /* DJ NAME */
 .glow {
-  /* margin-top: 30px;
-  font-size: 64px;
-  color: #00ffff;
-  text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;*/
   margin-top: 30px;
   font-size: 125px;
   font-weight: bold;
@@ -61,35 +57,12 @@ body {
   opacity: 0.85;
 }
 
-/* WAVE ANIMATION */
-/*.wave {
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-  margin-bottom: 25px;
-}
-
-.wave span {
-  width: 6px;
-  height: 30px;
-  background: #ff00aa;
-  animation: wave 1s infinite ease-in-out;
-}
-
-.wave span:nth-child(2) { animation-delay: 0.1s; }
-.wave span:nth-child(3) { animation-delay: 0.2s; }
-.wave span:nth-child(4) { animation-delay: 0.5s; }
-.wave span:nth-child(5) { animation-delay: 0.4s; }
-.wave span:nth-child(6) { animation-delay: 0.1s; }
-.wave span:nth-child(7) { animation-delay: 0.3s; }
-.wave span:nth-child(8) { animation-delay: 0.1s; }
-.wave span:nth-child(9) { animation-delay: 0.2s; } */
 .wave {
   position: relative;
   width: 240px;
   height: 140px;
   margin: 60px auto;
-  animation: beatDrop 1.6s infinite ease-in-out;
+  animation: beatDrop 0.5s infinite ease-in-out;
 }
 
 .wave span {
@@ -97,7 +70,7 @@ body {
   top: 150%;
   left: 50%;
   width: 6px;
-  height: 28px;
+  height: 8px;
   border-radius: 6px;
   transform-origin: center -85px;
   animation:
@@ -107,8 +80,8 @@ body {
 
 /* 360 / 48 = 7.5deg */
 .wave span:nth-child(n) {
-  transform: rotate(calc(7.5deg * var(--i)));
-  animation-delay: calc(0.03s * var(--i));
+  transform: rotate(calc(70deg * var(--i)));
+  animation-delay: calc(0.1s * var(--i));
 }
 
 /* assign index */
@@ -144,7 +117,7 @@ body {
     opacity: 0.4;
   }
   50% {
-    height: 70px;
+    height: 100px;
     opacity: 1;
   }
 }
@@ -153,17 +126,37 @@ body {
 @keyframes rgb {
   0%   { background: rgb(234, 0, 255);   box-shadow: 0 0 10px rgb(153, 0, 255); }
   33%  { background: rgb(255, 0, 144);  box-shadow: 0 0 10px rgb(255, 0, 106); }
-  66%  { background: rgb(234, 0, 255);  box-shadow: 0 0 10px rgb(195, 0, 255); }
-  100% { background: rgb(255, 0, 111);   box-shadow: 0 0 10px red; }
+  66%  { background: rgb(255, 0, 128);  box-shadow: 0 0 10px rgb(195, 0, 255); }
+  100% { background: rgb(195, 0, 255);   box-shadow: 0 0 10px red; }
 }
 
 /* fake beat drop pulse */
 @keyframes beatDrop {
   0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.08); }
+  50%      { transform: scale(1.02); }
 }
 
-/* BUTTONS */
+/* PHOTO */
+.circle {
+  position: absolute;
+  top: 57.4%;
+  left: 50.3%;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;transform-origin: center -0px;
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+
+.circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.circle {
+  animation: spin 6s linear infinite;
+}
 
 /* ANIMATIONS */
 @keyframes wave {
@@ -179,5 +172,74 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+
+/* Container */
+.contact {
+  display: flex;
+  gap: 64px;                 /* 255px is very wide—24–32px is typical */
+  justify-content: center;
+  align-items: center;
+  margin-top: 218px;          /* 130px is quite large for most layouts */
+  flex-wrap: wrap;           /* allows wrap on small screens */
+}
+
+/* Base button style */
+.contact a {
+  width: 60px;               /* give it a visible size */
+  height: 60px;
+  border-radius: 50%;        /* circular buttons */
+  display: inline-flex;      /* inline-flex is fine for anchors */
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28px;           /* icon font size (adjust as needed) */
+  text-decoration: none;
+  background: #666;          /* fallback color if a class not set */
+  box-shadow: 0 0 0 rgba(0,0,0,0);  /* smoother transition from none */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+/* Brand colors */
+.contact a.telegram  { background: #0088cc; }
+.contact a.facebook  { background: #1877f2; }
+.contact a.tiktok    { background: #000000;    } /* TikTok commonly black; adjust if you prefer #010101 or gradient */
+
+/* Hover / active */
+.contact a:hover {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+}
+
+.contact a:active {
+  transform: translateY(0) scale(1.02);
+}
+
+/* Keyboard accessibility */
+.contact a:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+/* Optional: if using <i> or <svg> inside <a>, normalize size */
+.contact a i,
+.contact a svg {
+  width: 1em;
+  height: 1em;
+  display: block;
+}
+
+.contact a.telegram:hover { box-shadow: 0 8px 18px rgba(0,136,204,0.45); }
+.contact a.facebook:hover { box-shadow: 0 8px 18px rgba(24,119,242,0.45); }
+.contact a.tiktok:hover   { box-shadow: 0 8px 18px rgba(0,0,0,0.45); }
+
+@media (max-width: 480px) {
+  .contact a {
+    width: 52px;
+    height: 52px;
+    font-size: 24px;
   }
 }
